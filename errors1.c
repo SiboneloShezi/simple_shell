@@ -8,7 +8,7 @@
  */
 int _erratoi(char *s)
 {
-	int i = 0;
+	int a = 0;
 	unsigned long int result = 0;
 
 	if (*s == '+')
@@ -30,12 +30,12 @@ int _erratoi(char *s)
 
 /**
  * print_error - prints an error message
- * @info: the parameter & return info struct
+ * @information: the parameter & return info struct
  * @estr: string containing specified error type
  * Return: 0 if no numbers in string, converted number otherwise
  *        -1 on error
  */
-void print_error(info_t *info, char *estr)
+void print_error(info_t *information, char *estr)
 {
 	_eputs(information->fname);
 	_eputs(": ");
@@ -56,7 +56,7 @@ void print_error(info_t *info, char *estr)
 int print_d(int input, int fd)
 {
 	int (*__putchar)(char) = _putchar;
-	int i, count = 0;
+	int a, count = 0;
 	unsigned int _abs_, currentnode;
 
 	if (fd == STDERR_FILENO)
@@ -69,15 +69,15 @@ int print_d(int input, int fd)
 	}
 	else
 		_abs_ = input;
-	current = _abs_;
+	currentnode = _abs_;
 	for (a = 1000000000; a > 1; a /= 10)
 	{
 		if (_abs_ / a)
 		{
-			__putchar('0' + currentnode / i);
+			__putchar('0' + currentnode / a);
 			count++;
 		}
-		currentnode %= i;
+		currentnode %= a;
 	}
 	__putchar('0' + currentnode);
 	count++;
@@ -87,13 +87,13 @@ int print_d(int input, int fd)
 
 /**
  * convert_number - converter function, a clone of itoa
- * @num: number
+ * @a: number
  * @base: base
  * @flags: argument flags
  *
  * Return: string
  */
-char *convert_number(long int num, int base, int flags)
+char *convert_number(long int a, int base, int flags)
 {
 	static char *array;
 	static char buffer[50];
@@ -123,11 +123,11 @@ char *convert_number(long int num, int base, int flags)
 
 /**
  * remove_comments - function replaces first instance of '#' with '\0'
- * @buf: address of the string to modify
+ * @buffer: address of the string to modify
  *
  * Return: Always 0;
  */
-void remove_comments(char *buf)
+void remove_comments(char *buffer)
 {
 	int a;
 

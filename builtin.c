@@ -2,12 +2,12 @@
 
 /**
  * _myexit - exits the shell
- * @info: Structure containing potential arguments. Used to maintain
+ * @information: Structure containing potential arguments. Used to maintain
  * constant function prototype.
  * Return: exits with a given exit status
  * (0) if info.argv[0] != "exit"
  */
-int _myexit(info_t *info)
+int _myexit(info_t *information)
 {
 	int exitcheck;
 
@@ -17,25 +17,25 @@ int _myexit(info_t *info)
 		if (exitcheck == -1)
 		{
 			information->status = 2;
-			print_error(info, "Illegal number: ");
+			print_error(information, "Illegal number: ");
 			_eputs(information->argv[1]);
 			_eputchar('\n');
 			return (1);
 		}
-		information->err_a = _erratoi(info->argv[1]);
+		information->err_num = _erratoi(information->argv[1]);
 		return (-2);
 	}
-	information->err_a = -1;
+	information->err_num = -1;
 	return (-2);
 }
 
 /**
  * _mycd - changes the current directory of the process
- * @info: Structure containing potential arguments. Used to maintain
+ * @information: Structure containing potential arguments. Used to maintain
  * constant function prototype.
  * Return: Always 0
  */
-int _mycd(info_t *info)
+int _mycd(info_t *information)
 {
 	char *s, *dir, buff[024];
 	int chdir_ret;
@@ -43,24 +43,24 @@ int _mycd(info_t *info)
 	s = getcwd(buff, 1024);
 	if (!s)
 		_puts("TODO: >>getcwd failure emsg here<<\n");
-	if (!info->argv[1])
+	if (!information->argv[1])
 	{
 		dir = _getenv(information, "HOME=");
 		if (!dir)
 			chdir_ret = /* TODO: what should this be? */
-				chdir((dir = _getenv(info, "PWD=")) ? dir : "/");
+				chdir((dir = _getenv(information, "PWD=")) ? dir : "/");
 		else
 			chdir_ret = chdir(dir);
 	}
-	else if (_strcmp(info->argv[1], "-") == 0)
+	else if (_strcmp(information->argv[1], "-") == 0)
 	{
-		if (!_getenv(info, "OLDPWD="))
+		if (!_getenv(information, "OLDPWD="))
 		{
 			_puts(s);
 			_putchar('\n');
 			return (1);
 		}
-		_puts(_getenv(info, "OLDPWD=")), _putchar('\n');
+		_puts(_getenv(information, "OLDPWD=")), _putchar('\n');
 		chdir_ret = /* TODO: what should this be? */
 			chdir((dir = _getenv(information, "OLDPWD=")) ? dir : "/");
 	}
@@ -81,11 +81,11 @@ int _mycd(info_t *info)
 
 /**
  * _myhelp - changes the current directory of the process
- * @info: Structure containing potential arguments. Used to maintain
+ * @information: Structure containing potential arguments. Used to maintain
  * constant function prototype.
  * Return: Always 0
  */
-int _myhelp(info_t *info)
+int _myhelp(info_t *information)
 {
 	char **arg_array;
 

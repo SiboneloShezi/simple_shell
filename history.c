@@ -45,7 +45,7 @@ if (ab == -1)
 return (-1);
 for (node = info->history; node; node = node->next)
 {
-_putsfd(node->str, ab);
+_putsab(node->str, ab);
 _putab('\n', ab);
 }
 _putab(BUF_FLUSH, ab);
